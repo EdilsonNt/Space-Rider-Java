@@ -1,18 +1,21 @@
 package spaceRider;
 
-public class SRMenu extends SRImagem{
+public class SRMenu extends SRElements{
 
-	public SRMenu(String local, int x, int y){
-		super(local, x, y);
+	public SRMenu(){
+		super();
+	}
+	public SRMenu(String local, int x, int y, boolean isThread){
+		super(local, x, y, isThread);
 	}
 	
-	//TODO Implementar as outras opcoes do menu
+	/**
+	 * TODO Implements other options of menu
+	 */
 	@Override
-	public void mover() {
+	public void move() {
 		setDy(2);
-		super.mover();
-		int y = getY();
-		if( y > 800 || y < 0) setVisivel(false);
+		super.move();
+		if(getY() > 800) setVisible(false);
 	}
-
 }

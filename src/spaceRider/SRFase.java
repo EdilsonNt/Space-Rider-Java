@@ -12,8 +12,9 @@ import javax.swing.Timer;
 @SuppressWarnings("serial")
 public class SRFase extends JPanel implements KeyListener, ActionListener{
 
-	private SRImagem bckgA, bckgB;
-	private SRMenu btIniciar, btPontuacao, btCreditos, logo, naveMenu1, naveMenu2, naveMenu3;
+	private SRElements bckgA, bckgB;
+	private SRMenu btIniciar, btPontuacao, btCreditos, 
+		logo, naveMenu1, naveMenu2, naveMenu3;
 	private SRCursor cursor;
 	private SRNave nave; 
 	private Timer timer;
@@ -23,20 +24,22 @@ public class SRFase extends JPanel implements KeyListener, ActionListener{
 	public SRFase() {
 		super();
 		
-		isIniciar 		= false;
-		timer 			= new Timer(7, this);
-		bckgA 			= new SRImagem(	"res/SRSpaco.jpg", 		  0,   0);
-		bckgB 			= new SRImagem(	"res/SRSpaco.jpg", 		  0,-800);
-		cursor 			= new SRCursor( "res/SRCursor.png", 	 10, 555); 
-		nave 			= new SRNave(	"res/SRNave.gif", 		365, 555);
-		btIniciar 		= new SRMenu(	"res/SRIniciar.png", 	  0, 550);
-		btPontuacao 	= new SRMenu(	"res/SRPontuacao.png", 	  0, 610);
-		btCreditos 		= new SRMenu(	"res/SRCreditos.png", 	  0, 670);
-		logo 			= new SRMenu(	"res/SRLogo.png", 		 90, 325);
-		naveMenu2 		= new SRMenu(	"res/SRInimigo1.gif", 	375, 135);
-		naveMenu1 		= new SRMenu(	"res/SRInimigo1.gif", 	345, 175);
-		naveMenu3 		= new SRMenu(	"res/SRInimigo1.gif", 	405, 175);
- 		tiros			= nave.getTiros();
+		isIniciar = false;
+		timer = new Timer(7, this);
+		
+		bckgA = new SRElements("res/SRSpaco.jpg", 0, 0, false);
+		bckgB = new SRElements("res/SRSpaco.jpg", 0,-800, false);
+		cursor = new SRCursor("res/SRCursor.png", 10, 555, false); 
+		nave = new SRNave("res/SRNave.gif", 365, 600, false);
+		btIniciar = new SRMenu("res/SRIniciar.png", 0, 550, false);
+		btPontuacao = new SRMenu("res/SRPontuacao.png", 0, 610, false);
+		btCreditos = new SRMenu("res/SRCreditos.png", 0, 670, false);
+		logo = new SRMenu("res/SRLogo.png", 90, 325, false);
+		naveMenu2 = new SRMenu("res/SRInimigo1.gif", 375, 135, false);
+		naveMenu1 = new SRMenu("res/SRInimigo1.gif", 345, 175, false);
+		naveMenu3 = new SRMenu("res/SRInimigo1.gif", 405, 175, false);
+ 		
+		tiros = nave.getTiros();
 
 		timer.start();
 		bckgA.setDy(1);
@@ -47,50 +50,49 @@ public class SRFase extends JPanel implements KeyListener, ActionListener{
 	}
 
 	public void paint(Graphics g){
-		g.drawImage(	bckgA.getImagem(), 		bckgA.getX(), 		bckgA.getY(), 800, 800, null);
-		g.drawImage(	bckgB.getImagem(), 		bckgB.getX(), 		bckgB.getY(), 800, 800, null);
+		g.drawImage(	bckgA.getImage(), 		bckgA.getX(), 		bckgA.getY(), 800, 800, null);
+		g.drawImage(	bckgB.getImage(), 		bckgB.getX(), 		bckgB.getY(), 800, 800, null);
 		
 		for (int i = 0; i < tiros.size(); i++) {
 			SRTiro tiroAux = tiros.get(i);
-			if(tiroAux.isVisivel()) {
-				g.drawImage(tiroAux.getImagem(), tiroAux.getX(), tiroAux.getY(), 10, 20, this);
+			if(tiroAux.isVisible()) {
+				g.drawImage(tiroAux.getImage(), tiroAux.getX(), tiroAux.getY(), 10, 20, this);
 			}else{
 				tiros.remove(i);
 			}
 		}
 		
-		if(naveMenu1.isVisivel()) 	g.drawImage(	naveMenu1.getImagem(), 		naveMenu1.getX(), 	naveMenu1.getY(), 	this);
-		if(naveMenu2.isVisivel()) 	g.drawImage(	naveMenu2.getImagem(), 		naveMenu2.getX(), 	naveMenu2.getY(), 	this);
-		if(naveMenu3.isVisivel()) 	g.drawImage(	naveMenu3.getImagem(), 		naveMenu3.getX(), 	naveMenu3.getY(), 	this);
-		if(logo.isVisivel()) 		g.drawImage(	logo.getImagem(), 			logo.getX(), 		logo.getY(), 		this);
-		if(nave.isVisivel()) 		g.drawImage(	nave.getImagem(), 			nave.getX(), 		nave.getY(), 		this);
-		if(btIniciar.isVisivel()) 	g.drawImage(	btIniciar.getImagem(),		btIniciar.getX(), 	btIniciar.getY(), 	this);
-		if(btPontuacao.isVisivel()) g.drawImage(	btPontuacao.getImagem(), 	btPontuacao.getX(), btPontuacao.getY(), this);
-		if(btCreditos.isVisivel()) 	g.drawImage(	btCreditos.getImagem(), 	btCreditos.getX(), 	btCreditos.getY(), 	this);
-		if(cursor.isVisivel()) 	  	g.drawImage(	cursor.getImagem(), 		cursor.getX(), 		cursor.getY(), 		this);
+		if(naveMenu1.isVisible()) 	g.drawImage(	naveMenu1.getImage(), 		naveMenu1.getX(), 	naveMenu1.getY(), 	this);
+		if(naveMenu2.isVisible()) 	g.drawImage(	naveMenu2.getImage(), 		naveMenu2.getX(), 	naveMenu2.getY(), 	this);
+		if(naveMenu3.isVisible()) 	g.drawImage(	naveMenu3.getImage(), 		naveMenu3.getX(), 	naveMenu3.getY(), 	this);
+		if(logo.isVisible()) 		g.drawImage(	logo.getImage(), 			logo.getX(), 		logo.getY(), 		this);
+		if(nave.isVisible()) 		g.drawImage(	nave.getImage(), 			nave.getX(), 		nave.getY(), 		this);
+		if(btIniciar.isVisible()) 	g.drawImage(	btIniciar.getImage(),		btIniciar.getX(), 	btIniciar.getY(), 	this);
+		if(btPontuacao.isVisible()) g.drawImage(	btPontuacao.getImage(), 	btPontuacao.getX(), btPontuacao.getY(), this);
+		if(btCreditos.isVisible()) 	g.drawImage(	btCreditos.getImage(), 	btCreditos.getX(), 	btCreditos.getY(), 	this);
+		if(cursor.isVisible()) 	  	g.drawImage(	cursor.getImage(), 		cursor.getX(), 		cursor.getY(), 		this);
 
 		g.dispose();
 	}
 
 	public void iniciarJogo(){
-		logo.mover();
-		btIniciar.mover();
-		btPontuacao.mover();
-		btCreditos.mover();
-		naveMenu1.mover();
-		naveMenu2.mover();
-		naveMenu3.mover();
-		bckgA.mover();
-		bckgB.mover();
+		logo.move();
+		btIniciar.move();
+		btPontuacao.move();
+		btCreditos.move();
+		naveMenu1.move();
+		naveMenu2.move();
+		naveMenu3.move();
+		bckgA.move();
+		bckgB.move();
 		
-		if(!logo.isVisivel() && !btIniciar.isVisivel() && !btPontuacao.isVisivel() && !btCreditos.isVisivel() && !naveMenu1.isVisivel() && !naveMenu2.isVisivel() && !naveMenu3.isVisivel())
+		if(!logo.isVisible() && !btIniciar.isVisible() && !btPontuacao.isVisible() && !btCreditos.isVisible() && !naveMenu1.isVisible() && !naveMenu2.isVisible() && !naveMenu3.isVisible())
 			isIniciar = true;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(!isIniciar) {
-			cursor.mover();
-			if(cursor.isIniciar && cursor.getMenu() == 1) {
+			if(cursor.isStarted && cursor.getMenu() == 1) {
 				iniciarJogo();
 			}
 		}
@@ -99,11 +101,11 @@ public class SRFase extends JPanel implements KeyListener, ActionListener{
 			tiros = nave.getTiros();
 			for (int i = 0; i < tiros.size(); i++) {
 				SRTiro tiroAux = tiros.get(i);
-				tiroAux.mover();
+				tiroAux.move();
 			}
-			nave.mover();
-			bckgA.mover();
-			bckgB.mover();
+			nave.move();
+			bckgA.move();
+			bckgB.move();
 			
 			if(bckgA.getY() > 799) bckgA.setY(-800);
 			if(bckgB.getY() > 799) bckgB.setY(-800);

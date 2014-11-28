@@ -12,7 +12,7 @@ public class SRPrincipal extends JFrame {
 		setTitle( "Space Rider");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(800, 800);
-		setResizable(true);
+		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
 		

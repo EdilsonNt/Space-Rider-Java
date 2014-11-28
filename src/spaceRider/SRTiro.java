@@ -1,16 +1,16 @@
 package spaceRider;
 
-public class SRTiro extends SRImagem{
+public class SRTiro extends SRElements{
 
-	public SRTiro(int x, int y){
-		super("res/SRTiro1.png", x, y);
+	public SRTiro(String local, int x, int y, boolean isThread){
+		super(local, x, y, isThread);
 	}
 
 	//TODO Implementar tipos de tiro: duplo, teleguiado e laser.
 	@Override
-	public void mover() {
+	public void move() {
 		setDy(-4);
-		super.mover();
-		if(getY() < 0) setVisivel(false);
+		super.move();
+		if(getY() < 0) setVisible(false);
 	}
 }
