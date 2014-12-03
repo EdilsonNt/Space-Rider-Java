@@ -2,7 +2,7 @@ package spaceRider.Elements;
 
 import java.awt.event.KeyEvent;
 
-public class SRCursor extends SRElements{
+public class SRCursor extends SRElement{
 	
 	private int menu = 1;
 	public boolean isStarted;

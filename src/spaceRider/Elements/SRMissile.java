@@ -1,6 +1,6 @@
 package spaceRider.Elements;
 
-public class SRMissile extends SRElements{
+public class SRMissile extends SRElement{
 
 	public SRMissile(String local, int x, int y, boolean isThread){
 		super(local, x, y, isThread);

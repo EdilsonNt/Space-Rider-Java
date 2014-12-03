@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SRSpaceShip extends SRElements{
+public class SRSpaceShip extends SRElement{
 
 	private List<SRMissile> missile;
 	private final static int SPACESHIP_CENTER = 24;
@@ -25,7 +25,6 @@ public class SRSpaceShip extends SRElements{
 	@Override
 	public void move() {
 		super.move();
-
 		if( getX() <   5 ) setX(  5);
 		if( getX() > 735 ) setX(735);
 	}
@@ -43,5 +42,19 @@ public class SRSpaceShip extends SRElements{
 		if( keyCode == KeyEvent.VK_LEFT)	setDx(0);
 		if( keyCode == KeyEvent.VK_RIGHT)	setDx(0);
 		if( keyCode == KeyEvent.VK_SPACE)	shoot( );
+	}
+	
+	@Override
+	public void run() {
+		while (isVisible()) {
+			try {
+				Thread.sleep(10);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}finally{
+				move();
+			}
+			
+		}
 	}
 }

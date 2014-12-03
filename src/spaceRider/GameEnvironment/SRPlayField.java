@@ -9,7 +9,7 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import spaceRider.Elements.SRCursor;
-import spaceRider.Elements.SRElements;
+import spaceRider.Elements.SRElement;
 import spaceRider.Elements.SRMenu;
 import spaceRider.Elements.SRMissile;
 import spaceRider.Elements.SRSpaceShip;
@@ -17,23 +17,24 @@ import spaceRider.Elements.SRSpaceShip;
 @SuppressWarnings("serial")
 public class SRPlayField extends JPanel implements KeyListener, Runnable{
 
-	private SRElements bckgA, bckgB;
+	private SRElement bckgA, bckgB;
 	private SRMenu btStart, btRecords, btCredits, 
 		logo, enemyMenu1, enemyMenu2, enemyMenu3;
 	private SRCursor cursor;
 	private SRSpaceShip spaceShip; 
 	private List<SRMissile> missiles;
 	private boolean isStarted;
+	Thread t;
 	
 	public SRPlayField() {
 		super();
 		
 		isStarted = false;
 
-		bckgA = new SRElements("res/SRSpace.jpg", 0, 0, false);
-		bckgB = new SRElements("res/SRSpace.jpg", 0,-800, false);
+		bckgA = new SRElement("res/SRSpace.jpg", 0, 0, false);
+		bckgB = new SRElement("res/SRSpace.jpg", 0,-800, false);
 		cursor = new SRCursor("res/SRCursor.png", 10, 555, false); 
-		spaceShip = new SRSpaceShip("res/SRSpaceShip.gif", 365, 600, false);
+		spaceShip = new SRSpaceShip("res/SRSpaceShip.gif", 365, 600, true);
 		btStart = new SRMenu("res/SRIniciar.png", 0, 550, false);
 		btRecords = new SRMenu("res/SRPontuacao.png", 0, 610, false);
 		btCredits = new SRMenu("res/SRCreditos.png", 0, 670, false);
@@ -50,7 +51,7 @@ public class SRPlayField extends JPanel implements KeyListener, Runnable{
 		addKeyListener(this);
 		setDoubleBuffered(true);
 		setFocusable(true);
-		Thread t = new Thread(this);
+		t = new Thread(this);
 		t.start();
 	}
 
@@ -79,7 +80,7 @@ public class SRPlayField extends JPanel implements KeyListener, Runnable{
 		g.drawImage( isVisibleToDraw(cursor), cursor.getX(), cursor.getY(), this);
 	}
 
-	public void iniciarJogo(){
+	public void reapMenus(){
 		logo.move();
 		btStart.move();
 		btRecords.move();
@@ -94,7 +95,7 @@ public class SRPlayField extends JPanel implements KeyListener, Runnable{
 			isStarted = true;
 	}
 	
-	public Image isVisibleToDraw(SRElements obj){
+	public Image isVisibleToDraw(SRElement obj){
 		Image img = null;
 		if(obj.isVisible()){
 			img = obj.getImage();
@@ -108,12 +109,11 @@ public class SRPlayField extends JPanel implements KeyListener, Runnable{
 			try {
 				Thread.sleep(9);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if(!isStarted) {
 				if(cursor.isStarted && cursor.getMenu() == 1) {
-					iniciarJogo();
+					reapMenus();
 				}
 			}else{
 				missiles = spaceShip.getMissiles();
@@ -121,7 +121,7 @@ public class SRPlayField extends JPanel implements KeyListener, Runnable{
 					SRMissile tiroAux = missiles.get(i);
 					tiroAux.move();
 				}
-				spaceShip.move();
+				//spaceShip.move();
 				bckgA.move();
 				bckgB.move();
 				
@@ -133,15 +133,21 @@ public class SRPlayField extends JPanel implements KeyListener, Runnable{
 		}
 	}
 	@Override
-	public void keyPressed(KeyEvent tecla) {
-		if(isStarted) spaceShip.keyPressed(tecla);
+	public void keyPressed(KeyEvent key) {
+		if(isStarted) spaceShip.keyPressed(key);
 	}
 
 	@Override
-	public void keyReleased(KeyEvent tecla) {
-		if(isStarted) spaceShip.keyReleased(tecla);
-		if(!isStarted) cursor.keyReleased(tecla);
+	public void keyReleased(KeyEvent key) {
+		int keyCode = key.getKeyCode();
+		if(isStarted) {
+			spaceShip.keyReleased(key);
+			if(keyCode == key.VK_ESCAPE) t.suspend();
+			if(keyCode == key.VK_ENTER) t.resume();
+		}
+		if(!isStarted) cursor.keyReleased(key);
 	}
+	
 	@Override
-	public void keyTyped(KeyEvent tecla) {}
+	public void keyTyped(KeyEvent key) {}
 }

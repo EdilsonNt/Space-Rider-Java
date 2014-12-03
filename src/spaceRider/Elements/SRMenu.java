@@ -1,6 +1,6 @@
 package spaceRider.Elements;
 
-public class SRMenu extends SRElements{
+public class SRMenu extends SRElement{
 
 	public SRMenu(){
 		super();

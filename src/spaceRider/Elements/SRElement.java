@@ -8,19 +8,23 @@ import spaceRider.AbstractClass.SRImage;
  * @author Edilson Nt
  * @since 28/11/2014
  */
-public class SRElements extends SRImage implements Runnable{
+public class SRElement extends SRImage implements Runnable{
 
 	private boolean isThread = false;
-	public SRElements() {
+	private Thread thread;
+	
+	public SRElement() {
 		super();
 	}
 	
-	public SRElements(String local, int x, int y, boolean isThread){
+	public SRElement(String local, int x, int y, boolean isThread){
 		this();
 		setLocal(local);
 		setX(x);
 		setY(y);
 		setVisible(true);
+		thread = new Thread(this);
+		setThread(isThread);
 		startThread();
 	}
 
@@ -36,6 +40,10 @@ public class SRElements extends SRImage implements Runnable{
 		}
 	}
 	
+	public void setThread(boolean isThread) {
+		this.isThread = isThread;
+	}
+
 	public void keyPressed(KeyEvent tecla) {}
 
 	public void keyReleased(KeyEvent tecla) {}
