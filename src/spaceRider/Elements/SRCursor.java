@@ -1,4 +1,4 @@
-package spaceRider;
+package spaceRider.Elements;
 
 import java.awt.event.KeyEvent;
 
@@ -19,7 +19,7 @@ public class SRCursor extends SRElements{
 	 * @param menu is number of menu selected
 	 * Receive menu and set Y of cursor
 	 */
-	public void mover(int menu) {
+	public void move(int menu) {
 		this.menu += menu;
 		if(this.menu > 3) this.menu = 1;
 		if(this.menu < 1) this.menu = 3;
@@ -29,7 +29,7 @@ public class SRCursor extends SRElements{
 			setY(555); 
 			break;
 		case 2: //Records
-			setY(615); 
+			setY(615);
 			break;
 		case 3: //Credits
 			setY(675); 
@@ -53,13 +53,12 @@ public class SRCursor extends SRElements{
 
 	@Override
 	public void keyReleased(KeyEvent key) {
-		int teclaCodigo = key.getKeyCode();
-		if( teclaCodigo == KeyEvent.VK_UP) 		mover(-1);		
-		if( teclaCodigo == KeyEvent.VK_DOWN) 	mover( 1);
-		if( teclaCodigo == KeyEvent.VK_SPACE) {	
+		int keyCode = key.getKeyCode();
+		if( keyCode == KeyEvent.VK_UP) move(-1);		
+		if( keyCode == KeyEvent.VK_DOWN) move( 1);
+		if( keyCode == KeyEvent.VK_ENTER) {	
 			setStarted(true);
 			setVisible(false);
-			
 		}
 	}
 

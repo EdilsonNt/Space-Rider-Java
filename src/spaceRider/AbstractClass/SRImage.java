@@ -1,4 +1,4 @@
-package spaceRider;
+package spaceRider.AbstractClass;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;

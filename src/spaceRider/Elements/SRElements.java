@@ -1,6 +1,8 @@
-package spaceRider;
+package spaceRider.Elements;
 
 import java.awt.event.KeyEvent;
+
+import spaceRider.AbstractClass.SRImage;
 
 /**
  * @author Edilson Nt
@@ -19,15 +21,7 @@ public class SRElements extends SRImage implements Runnable{
 		setX(x);
 		setY(y);
 		setVisible(true);
-		if(isThread) startThread();
-	}
-
-	public boolean isThread() {
-		return isThread;
-	}
-
-	public void setThread(boolean isThread) {
-		this.isThread = isThread;
+		startThread();
 	}
 
 	public void move(){
@@ -36,8 +30,10 @@ public class SRElements extends SRImage implements Runnable{
 	}
 
 	public void startThread(){
-		Thread t = new Thread(this);
-		t.start();
+		if(isThread){
+			Thread thread = new Thread(this);
+			thread.start();
+		}
 	}
 	
 	public void keyPressed(KeyEvent tecla) {}

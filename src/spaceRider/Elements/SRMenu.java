@@ -1,4 +1,4 @@
-package spaceRider;
+package spaceRider.Elements;
 
 public class SRMenu extends SRElements{
 
@@ -14,7 +14,7 @@ public class SRMenu extends SRElements{
 	 */
 	@Override
 	public void move() {
-		setDy(2);
+		setDy(3);
 		super.move();
 		if(getY() > 800) setVisible(false);
 	}
