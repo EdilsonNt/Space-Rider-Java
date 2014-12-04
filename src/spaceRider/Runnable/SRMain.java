@@ -15,7 +15,7 @@ import spaceRider.GameEnvironment.SRPlayField;
 public class SRMain extends JFrame {
 
 	public SRMain() {
-		//add(new SRPlayField());
+		add(new SRPlayField());
 		setTitle( "Space Rider");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(800, 800);
@@ -27,11 +27,5 @@ public class SRMain extends JFrame {
 	
 	public static void main(String[] args) {
 		new SRMain();
-		
-		List<SRScreenPosition> screenPositions = new ArrayList<>(Arrays.asList(SRScreenPosition.values()));
-		for (int i = 0; i < screenPositions.size(); i++) {
-			Collections.shuffle(screenPositions);
-			System.out.println(i + "-----" + screenPositions.get(i));
-		}
 	}
 }
