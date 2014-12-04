@@ -9,6 +9,9 @@ public class SRSpaceShip extends SRElement{
 	private List<SRMissile> missile;
 	private final static int SPACESHIP_CENTER = 24;
 	
+	public SRSpaceShip(){
+		super();
+	}
 	public SRSpaceShip(String local, int x, int y) {
 		super(local, x, y);
 		missile = new ArrayList<>();

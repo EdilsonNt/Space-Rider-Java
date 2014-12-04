@@ -170,8 +170,8 @@ public class SRPlayField extends JPanel implements KeyListener, Runnable{
 		int keyCode = key.getKeyCode();
 		if(isStarted) {
 			spaceShip.keyReleased(key);
-			if(keyCode == key.VK_ESCAPE) controlThreads("stop");
-			if(keyCode == key.VK_ENTER) controlThreads("resume");
+			if(keyCode == KeyEvent.VK_ESCAPE) controlThreads("stop");
+			if(keyCode == KeyEvent.VK_ENTER) controlThreads("resume");
 		}
 		if(!isStarted) cursor.keyReleased(key);
 	}
