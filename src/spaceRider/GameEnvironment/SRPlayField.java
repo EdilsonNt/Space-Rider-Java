@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -24,25 +25,26 @@ public class SRPlayField extends JPanel implements KeyListener, Runnable{
 	private SRSpaceShip spaceShip; 
 	private List<SRMissile> missiles;
 	private boolean isStarted;
-	Thread t;
+	private List<Thread> threads;
+	private Thread mainThread;
 	
 	public SRPlayField() {
 		super();
-		
+		threads = new ArrayList<Thread>();
 		isStarted = false;
 
-		bckgA = new SRElement("res/SRSpace.jpg", 0, 0, false);
-		bckgB = new SRElement("res/SRSpace.jpg", 0,-800, false);
-		cursor = new SRCursor("res/SRCursor.png", 10, 555, false); 
-		spaceShip = new SRSpaceShip("res/SRSpaceShip.gif", 365, 600, true);
-		btStart = new SRMenu("res/SRIniciar.png", 0, 550, false);
-		btRecords = new SRMenu("res/SRPontuacao.png", 0, 610, false);
-		btCredits = new SRMenu("res/SRCreditos.png", 0, 670, false);
-		logo = new SRMenu("res/SRLogo.png", 90, 325, false);
+		bckgA = new SRElement("res/SRSpace.jpg", 0, 0);
+		bckgB = new SRElement("res/SRSpace.jpg", 0,-800);
+		cursor = new SRCursor("res/SRCursor.png", 10, 555); 
+		spaceShip = new SRSpaceShip("res/SRSpaceShip.gif", 365, 600);
+		btStart = new SRMenu("res/SRIniciar.png", 0, 550);
+		btRecords = new SRMenu("res/SRPontuacao.png", 0, 610);
+		btCredits = new SRMenu("res/SRCreditos.png", 0, 670);
+		logo = new SRMenu("res/SRLogo.png", 90, 325);
 		
-		enemyMenu1 = new SRMenu("res/SREnemy1.gif", 345, 175, false);
-		enemyMenu2 = new SRMenu("res/SREnemy1.gif", 375, 135, false);
-		enemyMenu3 = new SRMenu("res/SREnemy1.gif", 405, 175, false);
+		enemyMenu1 = new SRMenu("res/SREnemy1.gif", 345, 175);
+		enemyMenu2 = new SRMenu("res/SREnemy1.gif", 375, 135);
+		enemyMenu3 = new SRMenu("res/SREnemy1.gif", 405, 175);
  		
 		missiles = spaceShip.getMissiles();
 
@@ -51,8 +53,11 @@ public class SRPlayField extends JPanel implements KeyListener, Runnable{
 		addKeyListener(this);
 		setDoubleBuffered(true);
 		setFocusable(true);
-		t = new Thread(this);
-		t.start();
+		
+		mainThread = new Thread(this);
+		threads.add(spaceShip.getThread());
+		threads.add(mainThread);
+		controlThreads("start");
 	}
 
 	public void paint(Graphics g){
@@ -132,6 +137,32 @@ public class SRPlayField extends JPanel implements KeyListener, Runnable{
 			repaint();
 		}
 	}
+	
+	public void controlThreads(String action){
+		switch (action) {
+		case "start":
+			for (Thread t : threads) {
+				t.start();
+			}
+			break;
+		case "stop":
+			for (Thread t : threads) {
+				t.suspend();;
+			}
+			break;
+		case "resume":
+			for (Thread t : threads) {
+				t.resume();
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	public void actionThread(){
+		
+	}
 	@Override
 	public void keyPressed(KeyEvent key) {
 		if(isStarted) spaceShip.keyPressed(key);
@@ -142,8 +173,8 @@ public class SRPlayField extends JPanel implements KeyListener, Runnable{
 		int keyCode = key.getKeyCode();
 		if(isStarted) {
 			spaceShip.keyReleased(key);
-			if(keyCode == key.VK_ESCAPE) t.suspend();
-			if(keyCode == key.VK_ENTER) t.resume();
+			if(keyCode == key.VK_ESCAPE) controlThreads("stop");
+			if(keyCode == key.VK_ENTER) controlThreads("resume");
 		}
 		if(!isStarted) cursor.keyReleased(key);
 	}

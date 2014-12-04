@@ -10,22 +10,19 @@ import spaceRider.AbstractClass.SRImage;
  */
 public class SRElement extends SRImage implements Runnable{
 
-	private boolean isThread = false;
 	private Thread thread;
 	
 	public SRElement() {
 		super();
 	}
 	
-	public SRElement(String local, int x, int y, boolean isThread){
+	public SRElement(String local, int x, int y){
 		this();
 		setLocal(local);
 		setX(x);
 		setY(y);
 		setVisible(true);
-		thread = new Thread(this);
-		setThread(isThread);
-		startThread();
+		setThread();
 	}
 
 	public void move(){
@@ -33,17 +30,14 @@ public class SRElement extends SRImage implements Runnable{
 		setY(getY() + getDy());
 	}
 
-	public void startThread(){
-		if(isThread){
-			Thread thread = new Thread(this);
-			thread.start();
-		}
+	public Thread getThread() {
+		return thread;
 	}
 	
-	public void setThread(boolean isThread) {
-		this.isThread = isThread;
+	public void setThread() {
+		thread = new Thread(this);
 	}
-
+	
 	public void keyPressed(KeyEvent tecla) {}
 
 	public void keyReleased(KeyEvent tecla) {}

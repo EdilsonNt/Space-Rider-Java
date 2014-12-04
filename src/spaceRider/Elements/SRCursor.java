@@ -11,8 +11,8 @@ public class SRCursor extends SRElement{
 		super();
 	}
 	
-	public SRCursor(String local, int x, int y, boolean isThread){
-		super(local, x, y, isThread);
+	public SRCursor(String local, int x, int y){
+		super(local, x, y);
 	}
 
 	/**

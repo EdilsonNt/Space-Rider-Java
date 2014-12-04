@@ -5,8 +5,8 @@ public class SRMenu extends SRElement{
 	public SRMenu(){
 		super();
 	}
-	public SRMenu(String local, int x, int y, boolean isThread){
-		super(local, x, y, isThread);
+	public SRMenu(String local, int x, int y){
+		super(local, x, y);
 	}
 	
 	/**

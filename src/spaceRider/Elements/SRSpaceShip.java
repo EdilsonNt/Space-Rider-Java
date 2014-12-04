@@ -9,13 +9,13 @@ public class SRSpaceShip extends SRElement{
 	private List<SRMissile> missile;
 	private final static int SPACESHIP_CENTER = 24;
 	
-	public SRSpaceShip(String local, int x, int y, boolean isThread) {
-		super(local, x, y, isThread);
+	public SRSpaceShip(String local, int x, int y) {
+		super(local, x, y);
 		missile = new ArrayList<>();
 	}
 	
 	public void shoot(){
-		missile.add(new SRMissile("res/SRShoot1.png", getX() + SPACESHIP_CENTER, getY(), false));
+		missile.add(new SRMissile("res/SRShoot1.png", getX() + SPACESHIP_CENTER, getY()));
 	}
 	
 	public List<SRMissile> getMissiles() {
