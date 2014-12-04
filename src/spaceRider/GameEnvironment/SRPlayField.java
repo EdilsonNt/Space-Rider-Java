@@ -160,9 +160,6 @@ public class SRPlayField extends JPanel implements KeyListener, Runnable{
 		}
 	}
 
-	public void actionThread(){
-		
-	}
 	@Override
 	public void keyPressed(KeyEvent key) {
 		if(isStarted) spaceShip.keyPressed(key);
