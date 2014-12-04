@@ -22,9 +22,13 @@ public enum SRScreenPosition {
 	T(703),
 	U(740);
 	
-	public int value;
-	SRScreenPosition(int pos){
+	public final int value;
+	SRScreenPosition(final int pos){
 		value = pos;
+	}
+
+	public int getValue() {
+		return value;
 	}
 	
 }

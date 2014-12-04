@@ -1,14 +1,7 @@
 package spaceRider.Runnable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
 import javax.swing.JFrame;
 
-import spaceRider.Enum.SRScreenPosition;
 import spaceRider.GameEnvironment.SRPlayField;
 
 @SuppressWarnings("serial")
