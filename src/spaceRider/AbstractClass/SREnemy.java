@@ -9,26 +9,17 @@ import spaceRider.Enum.SRScreenPosition;
 
 public abstract class SREnemy extends SRSpaceShip {
 
-	private List<SREnemy> party;
-	private List<SRScreenPosition> screenPosition;
+	private static final List<SRScreenPosition> SCREEN_POSITION = new ArrayList<SRScreenPosition>(Arrays.asList(SRScreenPosition.values()));
 	
 	public SREnemy() {
-		party = new ArrayList<SREnemy>();
-		screenPosition = new ArrayList<SRScreenPosition>(Arrays.asList(SRScreenPosition.values()));
 		setY(0);
 		setVisible(true);
 		setThread();
 	}
 	
-	public List<SRScreenPosition> getScreenPosition() {
-		return screenPosition;
+	public static List<SRScreenPosition> getScreenPosition() {
+		return SCREEN_POSITION;
 	}
-
-	public List<SREnemy> getParty() {
-		return party;
-	}
-	
-	public abstract void setParty();
 	
 	@Override
 	public void move() {
@@ -36,5 +27,12 @@ public abstract class SREnemy extends SRSpaceShip {
 		setY(getY() + getDy());
 		
 		if(getY() > 850 || getX() < -50 || getX() > 850) setVisible(false);
+	}
+	
+	@Override
+	public void run() {
+		while(isVisible()){
+			move();
+		}
 	}
 }
