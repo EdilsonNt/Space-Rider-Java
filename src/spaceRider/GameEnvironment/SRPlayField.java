@@ -48,8 +48,8 @@ public class SRPlayField extends JPanel implements KeyListener, Runnable{
  		
 		missiles = spaceShip.getMissiles();
 
-		bckgA.setDy(2);
-		bckgB.setDy(2);
+		bckgA.setDy(1);
+		bckgB.setDy(1);
 		addKeyListener(this);
 		setDoubleBuffered(true);
 		setFocusable(true);
