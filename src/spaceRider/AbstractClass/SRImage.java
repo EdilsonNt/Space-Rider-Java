@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 public abstract class SRImage {
 
 	private int x, y, dx, dy;
-	private boolean isVisible;
+	private volatile boolean isVisible;
 	private String local;
 	private Image image;
 	
